@@ -1,0 +1,193 @@
+DROP DATABASE IF EXISTS luxurywinedb;
+
+create database luxurywinedb;
+
+USE luxurywinedb;
+
+
+CREATE TABLE tb_clientes(
+id_cliente INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+nombre_cliente VARCHAR(50) NOT NULL,
+apellido_cliente VARCHAR(50) NOT NULL,
+dui_cliente VARCHAR(10) UNIQUE NOT NULL,
+correo_cliente VARCHAR(100) UNIQUE NOT NULL,
+telefono_cliente varchar(9) UNIQUE NOT NULL,
+direccion_cliente VARCHAR(250) NOT NULL,
+clave_cliente VARCHAR(100) NOT NULL,
+estado_cliente ENUM("Activo", "Inactivo") NOT NULL DEFAULT("Inactivo"),
+fecha_registro DATE NOT NULL default NOW()
+);
+
+
+CREATE TABLE tb_ordenes(
+id_orden INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+id_cliente INT NOT NULL,
+estado_orden ENUM("Entregada", "Anulada", "Finalizada", "Pendiente") NOT NULL,
+fecha_registro DATE NOT NULL DEFAULT NOW(),
+direccion_orden VARCHAR(250) NOT NULL
+);
+
+-- LLave foranea de las ordenes
+ALTER TABLE tb_ordenes ADD CONSTRAINT fk_orden_cliente FOREIGN KEY(id_cliente) REFERENCES tb_clientes(id_cliente);
+
+
+CREATE TABLE tb_administradores(
+id_administrador INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+nombre_admistrador  VARCHAR(50) NOT NULL,
+apellido_administrador VARCHAR(50) NOT NULL,
+correo_administrador VARCHAR(100) UNIQUE NOT NULL,
+alias_administrador VARCHAR(100) UNIQUE NOT NULL,
+clave_administrador VARCHAR(100) NOT NULL,
+fecha_registro DATE NOT NULL DEFAULT NOW(),
+id_nivel INT NOT NULL
+);
+
+
+create table tb_niveles_administradores(
+id_nivel INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+nivel  VARCHAR(100) NOT NULL
+);
+
+-- LLave foranea de los administradores
+ALTER TABLE tb_administradores ADD CONSTRAINT fk_nivel_admin FOREIGN KEY(id_nivel) REFERENCES tb_niveles_administradores(id_nivel);
+
+
+CREATE TABLE tb_categorias(
+id_categoria INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+nombre_categoria VARCHAR(50) NOT NULL,
+descripcion_categoria VARCHAR(250) NOT NULL,
+imagen_categoria VARCHAR(150) NOT NULL
+);
+
+
+CREATE TABLE tb_marcas(
+id_marca INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+nombre_marca VARCHAR(75) NOT NULL,
+logo_marca VARCHAR(150) NOT NULL
+);
+
+
+CREATE TABLE tb_productos(
+id_producto INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+id_marca INT NOT NULL,
+id_categoria INT NOT NULL,
+id_administrador INT NOT NULL,
+nombre_producto VARCHAR(50) NOT NULL,
+descripcion_producto VARCHAR(250) NOT NULL,
+precio_producto NUMERIC(8,2) NOT NULL CHECK(precio_producto > 0),
+imagen_producto VARCHAR(100) NOT NULL,
+estado_producto ENUM("En venta", "No disponible") NOT NULL,
+existencias_producto INT NOT NULL CHECK(existencias_producto >= 0),
+fecha_registro DATE NOT NULL default NOW(),
+descuento_producto DECIMAL(4,2) NULL CHECK(descuento_producto < 100)
+);
+
+-- LLaves foraneas de los productos
+ALTER TABLE tb_productos ADD CONSTRAINT fk_producto_marca FOREIGN KEY(id_marca) REFERENCES tb_marcas(id_marca);
+ALTER TABLE tb_productos ADD CONSTRAINT fk_producto_admin FOREIGN KEY(id_administrador) REFERENCES tb_administradores(id_administrador);
+ALTER TABLE tb_productos ADD CONSTRAINT fk_producto_categoria FOREIGN KEY(id_categoria) REFERENCES tb_categorias(id_categoria);
+
+
+CREATE TABLE tb_detallesOrdenes(
+id_detalle INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+id_orden INT NOT NULL,
+id_producto INT NOT NULL,
+cantidad_producto INT CHECK(cantidad_producto > 0),
+total_a_pagar DECIMAL(5,2) NOT NULL CHECK(total_a_pagar > 0)
+);
+
+-- LLaves foraneas de los detalles de las ordenes
+ALTER TABLE tb_detallesOrdenes ADD CONSTRAINT fk_orden_detalle FOREIGN KEY(id_orden) REFERENCES tb_ordenes(id_orden);
+ALTER TABLE tb_detallesOrdenes ADD CONSTRAINT fk_orden_productos FOREIGN KEY (id_producto) REFERENCES tb_productos(id_producto);
+
+
+CREATE TABLE tb_valoraciones(
+id_valoracion INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+id_detalle INT NOT NULL,
+calificacion_producto INT NULL,
+comentario_producto varchar(250) NULL,
+fecha_valoracion DATE NOT NULL DEFAULT NOW(),
+estado_comentario ENUM("Habilitado", "Deshabilitado") NOT NULL
+);
+
+-- LLave foranea de la las valoraciones
+ALTER TABLE tb_valoraciones ADD CONSTRAINT fk_orden_valoracion FOREIGN KEY (id_detalle) REFERENCES tb_detallesOrdenes(id_detalle);
+
+
+-- trigger
+
+DELIMITER //
+CREATE TRIGGER actualizar_existencias_detalle
+AFTER INSERT ON tb_detallesordenes
+FOR EACH ROW
+BEGIN
+UPDATE tb_productos SET existencias_producto = existencias_producto - NEW.cantidad_producto
+WHERE id_producto = NEW.id_producto;
+END
+//
+DELIMITER ;
+
+-- procedimiento almacenado
+
+SELECT * FROM tb_detallesordenes;
+SELECT * FROM tb_productos;
+
+
+DELIMITER //
+
+CREATE PROCEDURE devolucion_producto(
+    IN id_detalle_in INT,
+    IN nueva_cantidad INT
+)
+BEGIN
+    DECLARE producto_id INT;
+    DECLARE cantidad_devuelta INT;
+    
+    -- Obtener el ID del producto y la cantidad devuelta del detalle del pedido
+    SELECT id_producto, cantidad_producto INTO producto_id, cantidad_devuelta
+    FROM tb_detallesordenes
+    WHERE id_detalle = id_detalle_in;
+    
+    -- Actualizar la cantidad en la tabla de productos
+    UPDATE tb_productos
+    SET existencias_producto = existencias_producto + (cantidad_devuelta - nueva_cantidad)
+    WHERE id_producto = producto_id;
+    
+    -- Actualizar la cantidad en el detalle del pedido
+    UPDATE tb_detallesordenes
+    SET cantidad_producto = nueva_cantidad
+    WHERE id_detalle = id_detalle_in;
+    
+    
+END
+
+//
+DELIMITER ;
+
+
+
+-- funcion
+
+DELIMITER //
+
+CREATE FUNCTION calcular_total_producto(producto_id INT, cantidad INT)
+RETURNS DECIMAL(10, 2)
+BEGIN
+    DECLARE precio_del_producto DECIMAL(10, 2);
+    DECLARE total DECIMAL(10, 2);
+    
+    -- Obtener el precio del producto
+    SELECT precio_producto INTO precio_del_producto
+    FROM tb_productos
+    WHERE id_producto = producto_id;
+    
+    -- Calcular el total
+    SET total = precio_del_producto * cantidad;
+    
+    RETURN total;
+END
+
+//
+DELIMITER ;
+
+
