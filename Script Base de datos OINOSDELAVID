@@ -18,6 +18,38 @@ estado_cliente ENUM("Activo", "Inactivo") NOT NULL DEFAULT("Inactivo"),
 fecha_registro DATE NOT NULL default NOW()
 );
 
+-- inserciones
+
+INSERT INTO tb_clientes (nombre_cliente, apellido_cliente, dui_cliente, correo_cliente, telefono_cliente, direccion_cliente, clave_cliente, estado_cliente, fecha_registro)
+VALUES 
+    ('Juan', 'Pérez', '12345789-0', 'juan@example.com', '6566-9000', 'Calle Principal #123', 'clave123', 'Activo', CURDATE()),
+    ('María', 'Gómez', '98765321-0', 'maria@example.com', '6890-9800', 'Avenida Central #456', 'clave456', 'Activo', CURDATE()),
+    ('Pedro', 'Martínez', '11111111-2', 'pedro@example.com', '7215-0999', 'Calle Secundaria #789', 'clave789', 'Activo', CURDATE()),
+    ('Ana', 'López', '22222122-0', 'ana@example.com', '6890-1110', 'Calle Lateral #321', 'clave321', 'Activo', CURDATE()),
+    ('Carlos', 'Hernández', '33333323-0', 'carlos@example.com', '6199-9000', 'Avenida Principal #654', 'clave654', 'Activo', CURDATE()),
+    ('Luis', 'Díaz', '44491444-0', 'luis@example.com', '7894-9000', 'Calle del Centro #987', 'clave987', 'Activo', CURDATE()),
+    ('Laura', 'Torres', '55555555-0', 'laura@example.com', '6122-9000', 'Calle Nueva #1234', 'clave1234', 'Activo', CURDATE()),
+    ('Sofía', 'Ramírez', '66666666-0', 'sofia@example.com', '6740-8000', 'Calle Vieja #5678', 'clave5678', 'Activo', CURDATE()),
+    ('Alejandro', 'Sánchez', '77777777-0', 'alejandro@example.com', '8770-9000', 'Avenida Moderna #9012', 'clave9012', 'Activo', CURDATE()),
+    ('Fernanda', 'García', '88888888-0', 'fernanda@example.com', '6110-9001', 'Avenida Antigua #3456', 'clave3456', 'Activo', CURDATE()),
+    ('Javier', 'Rodríguez', '99999999-0', 'javier@example.com', '6891-9100', 'Calle Tranquila #7890', 'clave7890', 'Activo', CURDATE()),
+    ('Gabriela', 'Pérez', '10101101-0', 'gabriela@example.com', '6890-7160', 'Calle Luminosa #12345', 'clave12345', 'Activo', CURDATE()),
+    ('Martín', 'Gómez', '12121121-0', 'martin@example.com', '6890-1880', 'Avenida Estrellada #67890', 'clave67890', 'Activo', CURDATE()),
+    ('Valentina', 'Martínez', '13133131-0', 'valentina@example.com', '6770-9000', 'Calle Estrellada #23456', 'clave23456', 'Activo', CURDATE()),
+    ('Diego', 'Hernández', '14141441-0', 'diego@example.com', '6310-9000', 'Avenida del Río #78901', 'clave78901', 'Activo', CURDATE()),
+    ('Camila', 'Díaz', '15151151-0', 'camila@example.com', '6812-9000', 'Calle del Sol #34567', 'clave34567', 'Activo', CURDATE()),
+    ('Mateo', 'Torres', '11616161-0', 'mateo@example.com', '6110-9000', 'Calle de la Luna #89012', 'clave89012', 'Activo', CURDATE()),
+    ('Isabella', 'Ramírez', '17117171-0', 'isabella@example.com', '9890-9000', 'Avenida del Viento #45678', 'clave45678', 'Activo', CURDATE()),
+    ('Daniel', 'Sánchez', '18181881-0', 'daniel@example.com', '6890-9090', 'Calle del Mar #123456', 'clave123456', 'Activo', CURDATE()),
+    ('Lucía', 'García', '19191191-0', 'lucia@example.com', '6890-9780', 'Calle de la Playa #678901', 'clave678901', 'Activo', CURDATE()),
+    ('Emilio', 'Rodríguez', '20220202-0', 'emilio@example.com', '6891-9000', 'Avenida del Cielo #234567', 'clave234567', 'Activo', CURDATE()),
+    ('Valeria', 'Pérez', '21212112-0', 'valeria@example.com', '6990-9000', 'Calle del Infierno #789012', 'clave789012', 'Activo', CURDATE()),
+    ('Lucas', 'Gómez', '22222222-1', 'lucas@example.com', '6890-9100', 'Calle del Paraíso #345678', 'clave345678', 'Activo', CURDATE()),
+    ('Mariana', 'Martínez', '22323232-0', 'mariana@example.com', '6790-9000', 'Calle del Edén #890123', 'clave890123', 'Activo', CURDATE()),
+    ('Matías', 'Hernández', '24242442-0', 'matias@example.com', '7890-9000', 'Avenida de los Ángeles #1234567', 'clave1234567', 'Activo', CURDATE()),
+    ('Amanda', 'Díaz', '25252522-0', 'amanda@example.com', '6890-9190', 'Calle de los Sueños #6789012', 'clave6789012', 'Activo', CURDATE());
+
+SELECT * FROM tb_clientes;
 
 CREATE TABLE tb_ordenes(
 id_orden INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -27,10 +59,39 @@ fecha_registro DATE NOT NULL DEFAULT NOW(),
 direccion_orden VARCHAR(250) NOT NULL
 );
 
+INSERT INTO tb_ordenes (id_cliente, estado_orden, fecha_registro, direccion_orden)
+VALUES 
+    (1, 'Entregada', CURDATE(), 'Calle Principal #123'),
+    (2, 'Pendiente', CURDATE(), 'Avenida Central #456'),
+    (3, 'Finalizada', CURDATE(), 'Calle Secundaria #789'),
+    (4, 'Entregada', CURDATE(), 'Calle Lateral #321'),
+    (5, 'Pendiente', CURDATE(), 'Avenida Principal #654'),
+    (6, 'Finalizada', CURDATE(), 'Calle del Centro #987'),
+    (7, 'Entregada', CURDATE(), 'Calle Nueva #1234'),
+    (8, 'Pendiente', CURDATE(), 'Calle Vieja #5678'),
+    (9, 'Finalizada', CURDATE(), 'Avenida Moderna #9012'),
+    (10, 'Entregada', CURDATE(), 'Avenida Antigua #3456'),
+    (11, 'Pendiente', CURDATE(), 'Calle Tranquila #7890'),
+    (12, 'Finalizada', CURDATE(), 'Calle Luminosa #12345'),
+    (13, 'Entregada', CURDATE(), 'Avenida Estrellada #67890'),
+    (14, 'Pendiente', CURDATE(), 'Calle Estrellada #23456'),
+    (15, 'Finalizada', CURDATE(), 'Avenida del Río #78901'),
+    (16, 'Entregada', CURDATE(), 'Calle del Sol #34567'),
+    (17, 'Pendiente', CURDATE(), 'Calle de la Luna #89012'),
+    (18, 'Finalizada', CURDATE(), 'Avenida del Viento #45678'),
+    (19, 'Entregada', CURDATE(), 'Calle del Mar #123456'),
+    (20, 'Pendiente', CURDATE(), 'Calle de la Playa #678901'),
+    (21, 'Finalizada', CURDATE(), 'Avenida del Cielo #234567'),
+    (22, 'Entregada', CURDATE(), 'Calle del Infierno #789012'),
+    (23, 'Pendiente', CURDATE(), 'Calle del Paraíso #345678'),
+    (24, 'Finalizada', CURDATE(), 'Calle del Edén #890123'),
+    (25, 'Entregada', CURDATE(), 'Avenida de los Ángeles #1234567');
+
+
 -- LLave foranea de las ordenes
 ALTER TABLE tb_ordenes ADD CONSTRAINT fk_orden_cliente FOREIGN KEY(id_cliente) REFERENCES tb_clientes(id_cliente);
 
-
+-- administradores
 CREATE TABLE tb_administradores(
 id_administrador INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 nombre_admistrador  VARCHAR(50) NOT NULL,
@@ -42,16 +103,53 @@ fecha_registro DATE NOT NULL DEFAULT NOW(),
 id_nivel INT NOT NULL
 );
 
-
+-- niveles de usuario
 create table tb_niveles_administradores(
 id_nivel INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 nivel  VARCHAR(100) NOT NULL
 );
 
+INSERT INTO tb_niveles_administradores (nivel)
+VALUES 
+    ('Administrador Principal'),
+	('Trabajador');
+    
+    SELECT * FROM tb_niveles_administradores;
+
 -- LLave foranea de los administradores
 ALTER TABLE tb_administradores ADD CONSTRAINT fk_nivel_admin FOREIGN KEY(id_nivel) REFERENCES tb_niveles_administradores(id_nivel);
 
+-- inserciones de administradores
+INSERT INTO tb_administradores (nombre_admistrador, apellido_administrador, correo_administrador, alias_administrador, clave_administrador, fecha_registro, id_nivel)
+VALUES 
+    ('Juan', 'Perez', 'juan.perez@example.com', 'juanperez', 'clave123', CURDATE(), 1),
+    ('Maria', 'Gomez', 'maria.gomez@example.com', 'mariagomez', 'clave456', CURDATE(),2),
+    ('Luis', 'Martinez', 'luis.martinez@example.com', 'luismartinez', 'clave789',CURDATE(), 1),
+    ('Ana', 'Rodriguez', 'ana.rodriguez@example.com', 'anarodriguez', 'clave101', CURDATE(),1),
+    ('Carlos', 'Lopez', 'carlos.lopez@example.com', 'carloslopez', 'clave112',CURDATE(), 2),
+    ('Laura', 'Sanchez', 'laura.sanchez@example.com', 'laurasanchez', 'clave131',CURDATE(), 2),
+    ('Pedro', 'Gonzalez', 'pedro.gonzalez@example.com', 'pedrogonzalez', 'clave415', CURDATE(),1),
+    ('Sofia', 'Diaz', 'sofia.diaz@example.com', 'sofiadiaz', 'clave161',CURDATE(), 2),
+    ('Diego', 'Hernandez', 'diego.hernandez@example.com', 'diegohernandez', 'clave718', CURDATE(),1),
+    ('Paula', 'Perez', 'paula.perez@example.com', 'paulaperez', 'clave919',CURDATE(), 1),
+    ('Miguel', 'Gomez', 'miguel.gomez@example.com', 'miguelgomez', 'clave202', CURDATE(),2),
+    ('Elena', 'Martinez', 'elena.martinez@example.com', 'elenamartinez', 'clave212',CURDATE(), 2),
+    ('Andrea', 'Rodriguez', 'andrea.rodriguez@example.com', 'andrearodriguez', 'clave525',CURDATE(), 1),
+    ('David', 'Lopez', 'david.lopez@example.com', 'davidlopez', 'clave282',CURDATE(), 2),
+    ('Carmen', 'Sanchez', 'carmen.sanchez@example.com', 'carmensanchez', 'clave292',CURDATE(), 2),
+    ('Javier', 'Gonzalez', 'javier.gonzalez@example.com', 'javiergonzalez', 'clave646',CURDATE(), 1),
+    ('Natalia', 'Diaz', 'natalia.diaz@example.com', 'nataliadiaz', 'clave313',CURDATE(), 2),
+    ('Roberto', 'Hernandez', 'roberto.hernandez@example.com', 'robertohernandez', 'clave323',CURDATE(), 2),
+    ('Silvia', 'Perez', 'silvia.perez@example.com', 'silviaperez', 'clave757',CURDATE(), 1),
+    ('Mario', 'Gomez', 'mario.gomez@example.com', 'mariogomez', 'clave434',CURDATE(), 2),
+    ('Isabel', 'Martinez', 'isabel.martinez@example.com', 'isabelmartinez', 'clave444',CURDATE(), 1),
+    ('Lucia', 'Rodriguez', 'lucia.rodriguez@example.com', 'luciarodriguez', 'clave868',CURDATE(), 1),
+    ('Santiago', 'Lopez', 'santiago.lopez@example.com', 'santiagolopez', 'clave555',CURDATE(), 2),
+    ('Raquel', 'Sanchez', 'raquel.sanchez@example.com', 'raquelsanchez', 'clave565',CURDATE(), 2);
 
+select * from tb_administradores;
+
+-- categorias
 CREATE TABLE tb_categorias(
 id_categoria INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 nombre_categoria VARCHAR(50) NOT NULL,
@@ -59,14 +157,74 @@ descripcion_categoria VARCHAR(250) NOT NULL,
 imagen_categoria VARCHAR(150) NOT NULL
 );
 
+INSERT INTO tb_categorias (nombre_categoria, descripcion_categoria, imagen_categoria)
+VALUES 
+    ('Vinos tintos', 'Variedades de vinos tintos de diferentes cepas y regiones.', 'vinos_tintos.jpg'),
+    ('Vinos blancos', 'Selección de vinos blancos de diversas cepas y estilos.', 'vinos_blancos.jpg'),
+    ('Vinos rosados', 'Amplia variedad de vinos rosados con distintos perfiles de sabor.', 'vinos_rosados.jpg'),
+    ('Champagnes', 'Champagnes de alta calidad para celebraciones y ocasiones especiales.', 'champagnes.jpg'),
+    ('Espumosos', 'Selección de vinos espumosos de diferentes procedencias y estilos.', 'espumosos.jpg'),
+    ('Vinos orgánicos', 'Vinos producidos de forma orgánica, respetando el medio ambiente.', 'vinos_organicos.jpg'),
+    ('Vinos biodinámicos', 'Vinos elaborados siguiendo los principios de la agricultura biodinámica.', 'vinos_biodinamicos.jpg'),
+    ('Vinos de crianza', 'Vinos de crianza en barrica con distintos tiempos y maderas.', 'vinos_crianza.jpg'),
+    ('Vinos reserva', 'Vinos reserva con una cuidada elaboración y envejecimiento.', 'vinos_reserva.jpg'),
+    ('Vinos gran reserva', 'Selección de vinos gran reserva de añadas excepcionales.', 'vinos_gran_reserva.jpg'),
+    ('Vinos jóvenes', 'Vinos jóvenes frescos y afrutados para disfrutar en cualquier ocasión.', 'vinos_jovenes.jpg'),
+    ('Vinos de autor', 'Vinos de autor elaborados por reconocidos enólogos.', 'vinos_autor.jpg'),
+    ('Vinos de pago', 'Vinos de pago con características únicas y singulares.', 'vinos_pago.jpg'),
+    ('Vinos monovarietales', 'Vinos elaborados con una sola variedad de uva para resaltar sus características.', 'vinos_monovarietales.jpg'),
+    ('Vinos de terruño', 'Vinos que expresan la influencia del terruño en su sabor y aroma.', 'vinos_terruno.jpg'),
+    ('Vinos de reserva especial', 'Vinos de reserva especial con características excepcionales.', 'vinos_reserva_especial.jpg'),
+    ('Vinos dulces naturales', 'Vinos dulces naturales con una concentración natural de azúcares.', 'vinos_dulces_naturales.jpg'),
+    ('Vinos fortificados', 'Vinos fortificados con mayor graduación alcohólica y sabores intensos.', 'vinos_fortificados.jpg'),
+    ('Vinos de hielo', 'Vinos de hielo elaborados con uvas congeladas para concentrar su dulzor.', 'vinos_hielo.jpg'),
+    ('Vinos de cosecha tardía', 'Vinos de cosecha tardía con un perfil dulce y complejo.', 'vinos_cosecha_tardia.jpg'),
+    ('Vinos de postre', 'Vinos para acompañar postres y quesos con sus sabores agridulces.', 'vinos_postre.jpg'),
+    ('Vinos espumosos rosados', 'Vinos espumosos rosados con elegancia y frescura.', 'vinos_espumosos_rosados.jpg'),
+    ('Vinos pet-nat', 'Vinos pet-nat (pétillant naturel) con fermentación natural y burbujas sutiles.', 'vinos_pet_nat.jpg'),
+    ('Vinos naranjas', 'Vinos blancos fermentados con sus pieles para obtener aromas y sabores distintivos.', 'vinos_naranjas.jpg'),
+    ('Vinos de barrica', 'Vinos que han sido envejecidos en barricas de roble para desarrollar su sabor y aroma característicos.', 'vinos_barrica.jpg');
+SELECT * FROM tb_categorias;
 
+
+-- marcas
 CREATE TABLE tb_marcas(
 id_marca INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 nombre_marca VARCHAR(75) NOT NULL,
 logo_marca VARCHAR(150) NOT NULL
 );
 
+INSERT INTO tb_marcas (nombre_marca, logo_marca)
+VALUES 
+    ('Bodegas Torres', 'torres_logo.jpg'),
+    ('Bodegas Vega Sicilia', 'vega_sicilia_logo.jpg'),
+    ('Château Margaux', 'chateau_margaux_logo.jpg'),
+    ('Opus One Winery', 'opus_one_logo.jpg'),
+    ('Domaine de la Romanée-Conti', 'romanee_conti_logo.jpg'),
+    ('Sassicaia', 'sassicaia_logo.jpg'),
+    ('Penfolds', 'penfolds_logo.jpg'),
+    ('Château Lafite Rothschild', 'lafite_rothschild_logo.jpg'),
+    ('Château Haut-Brion', 'haut_brion_logo.jpg'),
+    ('Château d''Yquem', 'chateau_dyquem_logo.jpg'),
+    ('Gaja', 'gaja_logo.jpg'),
+    ('Antinori', 'antinori_logo.jpg'),
+    ('Mouton Rothschild', 'mouton_rothschild_logo.jpg'),
+    ('Bollinger', 'bollinger_logo.jpg'),
+    ('Louis Roederer', 'louis_roederer_logo.jpg'),
+    ('Moët & Chandon', 'moet_chandon_logo.jpg'),
+    ('Château Latour', 'chateau_latour_logo.jpg'),
+    ('Cloudy Bay', 'cloudy_bay_logo.jpg'),
+    ('Krug', 'krug_logo.jpg'),
+    ('Dom Pérignon', 'dom_perignon_logo.jpg'),
+    ('Penfolds', 'penfolds_logo.jpg'),
+    ('Château Cheval Blanc', 'cheval_blanc_logo.jpg'),
+    ('Château Petrus', 'petrus_logo.jpg'),
+    ('Château Palmer', 'palmer_logo.jpg'),
+    ('Château d''Issan', 'chateau_dissan_logo.jpg');
+    
+    SELECT * FROM tb_marcas;
 
+-- Productos
 CREATE TABLE tb_productos(
 id_producto INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 id_marca INT NOT NULL,
@@ -82,10 +240,46 @@ fecha_registro DATE NOT NULL default NOW(),
 descuento_producto DECIMAL(4,2) NULL CHECK(descuento_producto < 100)
 );
 
+INSERT INTO tb_productos (id_marca, id_categoria, id_administrador, nombre_producto, descripcion_producto, precio_producto, imagen_producto, estado_producto, existencias_producto, fecha_registro, descuento_producto)
+VALUES 
+    (1, 1, 1, 'Vino Tinto Reserva', 'Vino tinto reserva de la marca Bodegas Torres.', 30.00, 'vino_tinto_reserva.jpg', 'En venta', 100, CURDATE(), 0),
+    (2, 1, 2, 'Vino Tinto Gran Reserva', 'Vino tinto gran reserva de la marca Bodegas Vega Sicilia.', 50.00, 'vino_tinto_gran_reserva.jpg', 'En venta', 75, CURDATE(), 0),
+    (3, 1, 3, 'Champagne Brut', 'Champagne brut de la marca Moët & Chandon.', 40.00, 'champagne_brut.jpg', 'En venta', 50, CURDATE(), 0),
+    (4, 2, 4, 'Vino Blanco Joven', 'Vino blanco joven de la marca Penfolds.', 25.00, 'vino_blanco_joven.jpg', 'En venta', 120, CURDATE(), 0),
+    (5, 3, 5, 'Rosado Semidulce', 'Vino rosado semidulce de la marca Cloudy Bay.', 35.00, 'rosado_semidulce.jpg', 'En venta', 80, CURDATE(), 0),
+    (6, 4, 6, 'Cava Extra Seco', 'Cava extra seco de la marca Freixenet.', 20.00, 'cava_extra_seco.jpg', 'En venta', 90, CURDATE(), 0),
+    (7, 5, 7, 'Vino Dulce Natural', 'Vino dulce natural de la marca Château d''Yquem.', 60.00, 'vino_dulce_natural.jpg', 'En venta', 40, CURDATE(), 0),
+    (8, 1, 8, 'Vino Tinto Crianza', 'Vino tinto crianza de la marca Château Margaux.', 45.00, 'vino_tinto_crianza.jpg', 'En venta', 60, CURDATE(), 0),
+    (9, 2, 9, 'Vino Blanco Reserva', 'Vino blanco reserva de la marca Antinori.', 55.00, 'vino_blanco_reserva.jpg', 'En venta', 70, CURDATE(), 0),
+    (10, 3, 10, 'Rosado Brut Nature', 'Vino rosado brut nature de la marca Château Latour.', 30.00, 'rosado_brut_nature.jpg', 'En venta', 85, CURDATE(), 0),
+    (11, 4, 11, 'Champagne Rosé', 'Champagne rosé de la marca Louis Roederer.', 65.00, 'champagne_rose.jpg', 'En venta', 55, CURDATE(), 0),
+    (12, 5, 12, 'Vino Dulce de Hielo', 'Vino dulce de hielo de la marca Gaja.', 75.00, 'vino_dulce_hielo.jpg', 'En venta', 30, CURDATE(), 0),
+    (13, 1, 13, 'Vino Tinto Roble', 'Vino tinto roble de la marca Bodegas Muga.', 35.00, 'vino_tinto_roble.jpg', 'En venta', 65, CURDATE(), 0),
+    (14, 2, 14, 'Vino Blanco Joven', 'Vino blanco joven de la marca Bollinger.', 30.00, 'vino_blanco_joven.jpg', 'En venta', 95, CURDATE(), 0),
+    (15, 3, 15, 'Rosado Semiseco', 'Vino rosado semiseco de la marca Château Palmer.', 40.00, 'rosado_semiseco.jpg', 'En venta', 75, CURDATE(), 0),
+    (16, 4, 16, 'Cava Brut Nature', 'Cava brut nature de la marca Louis Roederer.', 25.00, 'cava_brut_nature.jpg', 'En venta', 100, CURDATE(), 0),
+    (17, 5, 17, 'Vino Dulce Vendimia Tardía', 'Vino dulce vendimia tardía de la marca Bodegas Torres.', 55.00, 'vino_dulce_vendimia_tardia.jpg', 'En venta', 45, CURDATE(), 0),
+    (18, 1, 18, 'Vino Tinto Crianza', 'Vino tinto crianza de la marca Domaine de la Romanée-Conti.', 75.00, 'vino_tinto_crianza.jpg', 'En venta', 60, CURDATE(), 0),
+    (19, 2, 19, 'Vino Blanco Semidulce', 'Vino blanco semidulce de la marca Krug.', 50.00, 'vino_blanco_semidulce.jpg', 'En venta', 80, CURDATE(), 0),
+    (20, 3, 20, 'Rosado Brut', 'Vino rosado brut de la marca Opus One Winery.', 60.00, 'rosado_brut.jpg', 'En venta', 70, CURDATE(), 0),
+    (21, 4, 21, 'Champagne Extra Brut', 'Champagne extra brut de la marca Penfolds.', 80.00, 'champagne_extra_brut.jpg', 'En venta', 50, CURDATE(), 0),
+    (22, 5, 22, 'Vino Dulce Pedro Ximénez', 'Vino dulce Pedro Ximénez de la marca Château Haut-Brion.', 90.00, 'vino_dulce_pedro_ximenez.jpg', 'En venta', 40, CURDATE(), 0),
+    (23, 1, 23, 'Vino Tinto Gran Reserva', 'Vino tinto gran reserva de la marca Mouton Rothschild.', 100.00, 'vino_tinto_gran_reserva.jpg', 'En venta', 30, CURDATE(), 0),
+    (24, 2, 24, 'Vino Blanco Barrica', 'Vino blanco barrica de la marca Château Cheval Blanc.', 70.00, 'vino_blanco_barrica.jpg', 'En venta', 40, CURDATE(), 0),
+    (25, 5, 25, 'Vino Rosado Espumoso', 'Vino rosado espumoso de la marca Château d''Issan.', 45.00, 'vino_rosado_espumoso.jpg', 'En venta', 55, CURDATE(), 0);
+
+
+
+
 -- LLaves foraneas de los productos
 ALTER TABLE tb_productos ADD CONSTRAINT fk_producto_marca FOREIGN KEY(id_marca) REFERENCES tb_marcas(id_marca);
-ALTER TABLE tb_productos ADD CONSTRAINT fk_producto_admin FOREIGN KEY(id_administrador) REFERENCES tb_administradores(id_administrador);
 ALTER TABLE tb_productos ADD CONSTRAINT fk_producto_categoria FOREIGN KEY(id_categoria) REFERENCES tb_categorias(id_categoria);
+ALTER TABLE tb_productos ADD CONSTRAINT fk_producto_adminISTRA FOREIGN KEY(id_administrador) REFERENCES tb_administradores(id_administrador);
+
+
+SELECT id_administrador
+FROM tb_productos
+WHERE id_administrador NOT IN (SELECT id_administrador FROM tb_administradores);
 
 
 CREATE TABLE tb_detallesOrdenes(
@@ -100,6 +294,33 @@ total_a_pagar DECIMAL(5,2) NOT NULL CHECK(total_a_pagar > 0)
 ALTER TABLE tb_detallesOrdenes ADD CONSTRAINT fk_orden_detalle FOREIGN KEY(id_orden) REFERENCES tb_ordenes(id_orden);
 ALTER TABLE tb_detallesOrdenes ADD CONSTRAINT fk_orden_productos FOREIGN KEY (id_producto) REFERENCES tb_productos(id_producto);
 
+INSERT INTO tb_detallesOrdenes (id_orden, id_producto, cantidad_producto, total_a_pagar)
+VALUES
+    (1, 1, 2, 20.50),
+    (2, 3, 3, 15.75),
+    (3, 2, 1, 35.25),
+    (4, 1, 4, 10.25),
+    (5, 4, 2, 30.00),
+    (6, 3, 3, 31.50),
+    (7, 5, 1, 12.75),
+    (8, 2, 1, 11.50),
+    (9, 1, 2, 20.50),
+    (10, 3, 1, 15.75),
+    (11, 2, 3, 35.25),
+    (12, 1, 1, 10.25),
+    (13, 4, 2, 30.00),
+    (14, 3, 3, 31.50),
+    (15, 5, 1, 12.75),
+    (16, 2, 1, 11.50),
+    (17, 1, 2, 20.50),
+    (18, 3, 1, 15.75),
+    (19, 2, 3, 35.25),
+    (20, 1, 1, 10.25),
+    (21, 4, 2, 30.00),
+    (22, 3, 3, 31.50),
+    (23, 5, 1, 12.75),
+    (24, 2, 1, 11.50),
+    (25, 1, 2, 20.50);
 
 CREATE TABLE tb_valoraciones(
 id_valoracion INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -110,8 +331,38 @@ fecha_valoracion DATE NOT NULL DEFAULT NOW(),
 estado_comentario ENUM("Habilitado", "Deshabilitado") NOT NULL
 );
 
+
+
 -- LLave foranea de la las valoraciones
 ALTER TABLE tb_valoraciones ADD CONSTRAINT fk_orden_valoracion FOREIGN KEY (id_detalle) REFERENCES tb_detallesOrdenes(id_detalle);
+
+INSERT INTO tb_valoraciones (id_detalle, calificacion_producto, comentario_producto, fecha_valoracion, estado_comentario)
+VALUES
+    (1, 5, 'Excelente producto, muy satisfecho con la calidad.', CURDATE(), 'Habilitado'),
+    (2, 4, 'Buena relación calidad-precio, recomendaría este vino.', CURDATE(), 'Habilitado'),
+    (3, 5, 'Me encantó este champagne, definitivamente volveré a comprarlo.', CURDATE(), 'Habilitado'),
+    (4, 4, 'Buen vino blanco, fresco y ligero.', CURDATE(), 'Deshabilitado'),
+    (5, 5, 'El rosado es delicioso, perfecto para una tarde de verano.', CURDATE(), 'Habilitado'),
+    (6, 4, 'Buen cava, muy refrescante.', CURDATE(), 'Habilitado'),
+    (7, 3, 'Regular, esperaba más sabor.', CURDATE(), 'Habilitado'),
+    (8, 4, 'Buen precio para la calidad.', CURDATE(), 'Deshabilitado'),
+    (9, 5, 'Fantástico vino tinto.', CURDATE(), 'Habilitado'),
+    (10, 4, 'Buen sabor y aroma.', CURDATE(), 'Habilitado'),
+    (11, 3, 'Aceptable, pero esperaba más.', CURDATE(), 'Habilitado'),
+    (12, 5, 'Increíble calidad, repetiré la compra.', CURDATE(), 'Habilitado'),
+    (13, 4, 'Muy buen vino, excelente relación calidad-precio.', CURDATE(), 'Habilitado'),
+    (14, 5, 'El mejor vino que he probado, altamente recomendado.', CURDATE(), 'Habilitado'),
+    (15, 4, 'Buen producto, entrega rápida.', CURDATE(), 'Habilitado'),
+    (16, 3, 'Regular, no cumplió completamente mis expectativas.', CURDATE(), 'Habilitado'),
+    (17, 5, 'Fantástico sabor y presentación.', CURDATE(), 'Habilitado'),
+    (18, 4, 'Buena calidad, recomendado.', CURDATE(), 'Deshabilitado'),
+    (19, 5, 'Excelente vino, muy contento con la compra.', CURDATE(), 'Habilitado'),
+    (20, 4, 'Buen producto, envío rápido.', CURDATE(), 'Habilitado'),
+    (21, 3, 'No fue lo que esperaba.', CURDATE(), 'Habilitado'),
+    (22, 5, 'Muy buen vino, lo recomendaría.', CURDATE(), 'Habilitado'),
+    (23, 4, 'Buen producto, buen servicio.', CURDATE(), 'Deshabilitado'),
+    (24, 5, 'Gran vino, volveré a comprar.', CURDATE(), 'Habilitado'),
+    (25, 4, 'Muy satisfecho con la compra.', CURDATE(), 'Habilitado');
 
 
 -- trigger
@@ -190,4 +441,11 @@ END
 //
 DELIMITER ;
 
+-- usuarios
 
+CREATE USER 'admin1'@'localhost' IDENTIFIED BY 'Contrasena123';
+GRANT SELECT, INSERT, UPDATE, DELETE ON luxurywinedb.* TO 'admin1'@'localhost';
+GRANT CREATE VIEW, TRIGGER ON luxurywinedb.* TO 'admin1'@'localhost';
+GRANT CREATE ROUTINE ON luxurywinedb.* TO 'admin1'@'localhost';
+
+select user, host from mysql.user;
